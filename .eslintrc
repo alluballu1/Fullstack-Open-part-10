@@ -1,0 +1,21 @@
+{
+  "plugins": ["react"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "parser": "@babel/eslint-parser",
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "react/prop-types": "off",
+    "semi": "error",
+    "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1 }]
+  },
+  "parserOptions": {
+    "sourceType": "module"
+  }
+}
