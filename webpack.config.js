@@ -1,5 +1,8 @@
+/* eslint-disable no-undef */
 const path = require("path");
 const createExpoWebpackConfigAsync = require("@expo/webpack-config");
+import 'dotenv/config';
+
 
 module.exports = async function (env, argv) {
 	const config = await createExpoWebpackConfigAsync(env, argv);
