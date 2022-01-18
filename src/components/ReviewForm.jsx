@@ -41,41 +41,57 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     minWidth: 100,
     alignItems: "center",
-    borderRadius: 50,
+    borderRadius: 10,
   },
   buttonTextStyle: {
     color: "white",
-    fontWeight: "bold",
+      fontWeight: "bold",
+    padding:5
   },
 });
 
-const LoginForm = ({ onSubmit }) => {
+const RevieForm = ({ onSubmit }) => {
   return (
     <View style={styles.containerStyle}>
-      <Text style={styles.titleStyle}>Sign in</Text>
       <View style={styles.inputContainerStyle}>
         <FormikTextInput
           style={styles.inputStyles}
-          name="username"
-          placeholder="Username"
+          name="ownerName"
+          placeholder="Repository owner name"
           testID ="usernameField"
         />
       </View>
       <View style={styles.inputContainerStyle}>
         <FormikTextInput
           style={styles.inputStyles}
-          name="password"
-          placeholder="Password"
+          name="repositoryName"
+          placeholder="Repository name"
           testID="passwordField"
         />
       </View>
-      <View>
+          <View>
+          <View style={styles.inputContainerStyle}>
+        <FormikTextInput
+          style={styles.inputStyles}
+          name="rating"
+          placeholder="Rating between 0 and 100"
+          testID ="usernameField"
+        />
+      </View>
+      <View style={styles.inputContainerStyle}>
+        <FormikTextInput
+          style={styles.inputStyles}
+          name="text"
+          placeholder="Review"
+          testID="passwordField"
+        />
+      </View>
         <Pressable style={styles.buttonStyle} onPress={onSubmit}>
-          <Text style={styles.buttonTextStyle}>Log in</Text>
+          <Text style={styles.buttonTextStyle}>Create a review</Text>
         </Pressable>
       </View>
     </View>
   );
 };
 
-export default LoginForm;
+export default RevieForm;

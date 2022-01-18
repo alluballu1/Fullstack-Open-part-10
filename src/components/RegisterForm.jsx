@@ -41,18 +41,18 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     minWidth: 100,
     alignItems: "center",
-    borderRadius: 50,
+    borderRadius: 10,
   },
   buttonTextStyle: {
     color: "white",
-    fontWeight: "bold",
+      fontWeight: "bold",
+    padding:5
   },
 });
 
-const LoginForm = ({ onSubmit }) => {
+const RegisterForm = ({ onSubmit }) => {
   return (
     <View style={styles.containerStyle}>
-      <Text style={styles.titleStyle}>Sign in</Text>
       <View style={styles.inputContainerStyle}>
         <FormikTextInput
           style={styles.inputStyles}
@@ -69,13 +69,21 @@ const LoginForm = ({ onSubmit }) => {
           testID="passwordField"
         />
       </View>
-      <View>
+          <View>
+          <View style={styles.inputContainerStyle}>
+        <FormikTextInput
+          style={styles.inputStyles}
+        name="PasswordConf"
+          placeholder="Password confirmation"
+          testID ="usernameField"
+        />
+      </View>
         <Pressable style={styles.buttonStyle} onPress={onSubmit}>
-          <Text style={styles.buttonTextStyle}>Log in</Text>
+          <Text style={styles.buttonTextStyle}>Register</Text>
         </Pressable>
       </View>
     </View>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

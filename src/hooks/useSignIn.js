@@ -4,19 +4,25 @@ import { AUTHORIZED_USER } from "../sevices/queries";
 import useAuthStorage from "./useAuthStorage";
 
 const useSignIn = () => {
-    const [mutate, result] = useMutation(AUTHORIZE);
-    const authStorage = useAuthStorage();
-    const apolloClient = useApolloClient();
+  const [mutate, result] = useMutation(AUTHORIZE);
+  const authStorage = useAuthStorage();
+  const apolloClient = useApolloClient();
 
-    const signIn = async ({ username, password }) => {
-        const result = await mutate({ variables: { input: { username, password } }, refetchQueries:[{query:AUTHORIZED_USER}] });
-        await authStorage.setAccessToken(result.data.authorize.accessToken);
-        apolloClient.resetStore();
-      // call the mutate function here with the right arguments
-        return result;
-    };
-  
-    return [signIn, result];
+  const signIn = async ({ username, password }) => {
+    const result = await mutate({
+      variables: { input: { username, password } },
+      refetchQueries: [{ query: AUTHORIZED_USER }],
+    });
+    const accessToken = result.data?.authorize?.accessToken;
+    if (accessToken) {
+      authStorage.setAccessToken(accessToken);
+      apolloClient.resetStore();
+    }
+    // call the mutate function here with the right arguments
+    return result;
+  };
+
+  return [signIn, result];
 };
-  
+
 export default useSignIn;

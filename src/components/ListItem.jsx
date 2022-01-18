@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Button, Image, StyleSheet, Text, View } from "react-native";
 const styles = StyleSheet.create({
   separator: {
     height: 10,
@@ -16,7 +16,11 @@ const styles = StyleSheet.create({
 
 const ListItem = ({ item, index }) => {
   return (
-    <View style={{ backgroundColor: "white", padding: 10 }} key={index}>
+    <View
+      testID="repositoryItem"
+      style={{ backgroundColor: "white", padding: 10 }}
+      key={index}
+    >
       <View style={{ display: "flex" }}>
         <View style={{ flexDirection: "row", width: "100%" }}>
           <Image
@@ -24,12 +28,19 @@ const ListItem = ({ item, index }) => {
             source={{ uri: item.ownerAvatarUrl }}
           />
           <View style={{ flexDirection: "column", padding: 5, width: "90%" }}>
-            <Text style={{ fontWeight: "bold", fontSize: 16 }}>
+            <Text
+              testID="fullname"
+              style={{ fontWeight: "bold", fontSize: 16 }}
+            >
               {item.fullName}
             </Text>
-            <Text style={{ marginTop: 10 }}>{item.description}</Text>
+            <Text testID="description" style={{ marginTop: 10 }}>
+              {item.description}
+            </Text>
             <View>
-              <Text style={styles.languageStyle}>{item.language}</Text>
+              <Text testID="language" style={styles.languageStyle}>
+                {item.language}
+              </Text>
             </View>
           </View>
         </View>
@@ -60,7 +71,7 @@ const ListItem = ({ item, index }) => {
           </View>
 
           <View style={{ flexDirection: "column", alignItems: "center" }}>
-            <Text fontWeight={"bold"}>
+            <Text testID="reviews" fontWeight={"bold"}>
               {item.reviewCount > 1000
                 ? Math.round(item.stargazersCount / 100) / 10 + "k"
                 : item.reviewCount}
@@ -69,10 +80,10 @@ const ListItem = ({ item, index }) => {
           </View>
 
           <View style={{ flexDirection: "column", alignItems: "center" }}>
-            <Text fontWeight={"bold"}>
-              {item.stargazersCount > 1000
-                ? Math.round(item.stargazersCount / 1000) / 10 + "k"
-                : null}
+            <Text testID="rating" fontWeight={"bold"}>
+              {item.ratingAverage > 1000
+                ? Math.round(item.ratingAverage / 1000) / 10 + "k"
+                : item.ratingAverage}
             </Text>
             <Text>Ratings</Text>
           </View>

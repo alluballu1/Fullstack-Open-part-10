@@ -13,6 +13,7 @@ import { useApolloClient, useQuery } from "@apollo/client";
 import { AUTHORIZED_USER } from "../sevices/queries";
 import AuthStorageContext from "../contexts/AuthStorageContext";
 import { useHistory } from "react-router-native";
+import useAuthorizedUser from "../hooks/useAuthorizedUser";
 
 const styles = StyleSheet.create({
   container: {
@@ -22,15 +23,13 @@ const styles = StyleSheet.create({
   titleStyle: {
     padding: 20,
     color: "white",
-    fontSize: 18,
   },
   // ...
 });
 const AppBar = () => {
   const apolloClient = useApolloClient();
-  const { data } = useQuery(AUTHORIZED_USER);
   const history = useHistory();
-  const authorizedUser = data ? data.authorizedUser : null;
+  const { authorizedUser } = useAuthorizedUser();
   const authStorage = useContext(AuthStorageContext);
 
   const onSignOut = async () => {
@@ -45,6 +44,16 @@ const AppBar = () => {
           <Text style={styles.titleStyle}>Repositories</Text>
         </Link>
 
+        {authorizedUser && (
+          <Link to={"/review"}>
+            <Text style={styles.titleStyle}>Create a review</Text>
+          </Link>
+        )}
+        {authorizedUser && (
+          <Link to={"/my_review"}>
+            <Text style={styles.titleStyle}>My reviews</Text>
+          </Link>
+        )}
         {!authorizedUser ? (
           <Link to={"/login"}>
             <Text style={styles.titleStyle}>Sign in</Text>
@@ -53,6 +62,11 @@ const AppBar = () => {
           <TouchableOpacity onPress={onSignOut}>
             <Text style={styles.titleStyle}>Sign out</Text>
           </TouchableOpacity>
+        )}
+        {!authorizedUser && (
+          <Link to={"/register"}>
+            <Text style={styles.titleStyle}>Register</Text>
+          </Link>
         )}
       </ScrollView>
     </View>

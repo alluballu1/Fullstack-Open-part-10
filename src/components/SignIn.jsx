@@ -11,8 +11,8 @@ const initialValues = {
 };
 
 const validationSchema = yup.object().shape({
-  username: yup.string().required("Weight is required"),
-  password: yup.string().required("Height is required"),
+  username: yup.string().required("username is required"),
+  password: yup.string().required("password is required"),
 });
 
 const LoginHandler = ({ onSubmit }) => {
